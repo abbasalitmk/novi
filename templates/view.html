@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+    <h1>View Binary Tree</h1>
+    <form method="get" action="{% url 'view' %}">
+        <input type="text" name="search" placeholder="Search by Name">
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="left" id="left" {% if is_left %}checked{% endif %}>
+            <label class="form-check-label" for="left">
+                Left
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="right" id="right" {% if is_right %}checked{% endif %}>
+            <label class="form-check-label" for="right">
+                Right
+            </label>
+        </div>
+        <button type="submit">Search</button>
+    </form>
+
+    <ul>
+        {% if selected_node %}
+        <li>ID: {{ selected_node.id }} - Name: {{ selected_node.name }} - Parent ID: {{ selected_node.parent_id }}</li>
+        {% elif binary_tree %}
+        {% for node in binary_tree %}
+        <li>ID: {{ node.id }} - Name: {{ node.name }} - Parent ID: {{ node.parent_id }}</li>
+        {% endfor %}
+        {% else %}
+        <li>No results found.</li>
+        {% endif %}
+    </ul>
+</body>
+
+</html>
